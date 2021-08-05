@@ -3,6 +3,7 @@ const resolve = (dir) => path.join(__dirname, '.', dir);
 const CracoLess = require('craco-less');
 const CracoAntDesignPlugin = require('craco-antd');
 const mockServer = require('./mock/server');
+const CracoAlias = require("craco-alias");
 
 module.exports = {
     babel: {
@@ -42,15 +43,22 @@ module.exports = {
                     libraryName: 'antd',
                     libraryDirectory: 'es',
                     style: true,
-                },
+                }
             },
         },
+        {
+            plugin: CracoAlias,
+            options: {
+                source: "tsconfig",
+                // baseUrl SHOULD be specified
+                // plugin does not take it from tsconfig
+                baseUrl: "./src",
+                // tsConfigPath should point to the file where "baseUrl" and "paths" are specified
+                tsConfigPath: "./tsconfig.extend.json"
+            },
+        }
     ],
-    webpack: {
-        alias: {
-            '@': resolve('src'),
-        },
-    },
+    webpack: {},
     devServer: (devServerConfig, { proxy }) => {
         devServerConfig.proxy = {
             ...proxy,
