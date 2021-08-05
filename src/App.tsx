@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './App.module.less';
-import 'antd/dist/antd.less';
 import {HomePage, SignInPage, RegisterPage, DetailPage} from './pages';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
