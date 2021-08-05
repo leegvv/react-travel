@@ -5,6 +5,7 @@ import {Col, Row, Typography} from 'antd';
 import sideImage from '@/assets/images/sider_2019_02-04.png';
 import sideImage2 from '@/assets/images/sider_2019_02-04-2.png';
 import sideImage3 from '@/assets/images/sider_2019_12-09.png';
+import {useTranslation} from 'react-i18next';
 
 export const HomePage: React.FC = () => {
     const [productList, setProductList] = React.useState({productList1: [], productList2: [], productList3: []});
@@ -14,6 +15,7 @@ export const HomePage: React.FC = () => {
             .then(data => setProductList(data));
     }, []);
     const {productList1 = [], productList2 = [], productList3 = []} = productList;
+    const {t} = useTranslation();
     return <>
         <Header/>
         <div className={styles.pageContent}>
@@ -31,7 +33,7 @@ export const HomePage: React.FC = () => {
                         level={3}
                         type='warning'
                     >
-                        爆款推荐
+                        {t('home_page.hot_recommended')}
                     </Typography.Title>
                 }
                 sideImage={sideImage}
@@ -43,7 +45,7 @@ export const HomePage: React.FC = () => {
                         level={3}
                         type='danger'
                     >
-                        新品上市
+                        {t('home_page.new_arrival')}
                     </Typography.Title>
                 }
                 sideImage={sideImage2}
@@ -55,7 +57,7 @@ export const HomePage: React.FC = () => {
                         level={3}
                         type='success'
                     >
-                        国内游推荐
+                        {t('home_page.domestic_travel')}
                     </Typography.Title>
                 }
                 sideImage={sideImage3}

@@ -1,6 +1,8 @@
 import React from 'react';
 import {Image, Typography} from 'antd';
 import {Link} from 'react-router-dom';
+import {useTranslation} from "react-i18next";
+
 
 interface PropsType {
     id: string | number;
@@ -11,6 +13,7 @@ interface PropsType {
 }
 
 export const ProductImage: React.FC<PropsType> = ({id, size, imageSrc, title, price}) => {
+    const {t} = useTranslation();
     return (
         <Link to={`/detail/${id}`}>
             {size === 'large' ? (
@@ -28,7 +31,7 @@ export const ProductImage: React.FC<PropsType> = ({id, size, imageSrc, title, pr
                     type='danger'
                     strong={true}
                 >
-                    ￥ {price} 起
+                    ￥ {price} {t('home_page.start_from')}
                 </Typography.Text>
             </div>
         </Link>
