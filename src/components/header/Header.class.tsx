@@ -52,7 +52,7 @@ class HeaderComponent extends React.Component<Props>{
                         <Typography.Text>{t('header.slogan')}</Typography.Text>
                         <Dropdown.Button
                             overlay={
-                                <Menu onClick={(e) => this.menuClickHandle(e)}>
+                                <Menu onClick={this.menuClickHandle}>
                                     {this.props.languageList.map((l) => (
                                         <Menu.Item key={l.code}>
                                             {l.name}
