@@ -14,7 +14,7 @@ const defaultState: LanguageState = {
     ]
 }
 
-export default (state = defaultState, action: LanguageActionTypes) => {
+const languageReducer = (state = defaultState, action: LanguageActionTypes) => {
     switch (action.type) {
         case CHANGE_LANGUAGE:
             i18next.changeLanguage(action.payload); //reducer应该是纯函数, 没有副作用，但此处有副作用
@@ -28,3 +28,5 @@ export default (state = defaultState, action: LanguageActionTypes) => {
             return state;
     }
 };
+
+export default languageReducer;
