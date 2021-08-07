@@ -288,5 +288,5 @@ const productList3 = [
 
 
 module.exports = (req, res) => {
-    res.json({productList1, productList2, productList3});
+    setTimeout(() => res.json({productList1, productList2, productList3}), 500);
 }
