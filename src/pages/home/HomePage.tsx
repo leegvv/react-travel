@@ -6,39 +6,18 @@ import sideImage from '@/assets/images/sider_2019_02-04.png';
 import sideImage2 from '@/assets/images/sider_2019_02-04-2.png';
 import sideImage3 from '@/assets/images/sider_2019_12-09.png';
 import {useTranslation} from 'react-i18next';
-import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import {useSelector} from '@/redux/hooks';
-import {
-    fetchRecommendProductionsStartActionCreator, fetchRecommendProductsFailActionCreator,
-    fetchRecommendProductsSuccessActionCreator
-} from '@/redux/recommendProducts/recommendProductsActions';
+import {loadDataActionCreator} from '@/redux/recommendProducts/recommendProductsActions';
 
 
 export const HomePage: React.FC = () => {
-    // const [productList, setProductList] = React.useState({productList1: [], productList2: [], productList3: []});
     const productList = useSelector(state => state.recommendProducts.productList);
-    // const [loading, setLoading] = React.useState(true);
     const loading = useSelector(state => state.recommendProducts.loading);
-    // const [error, setError] = React.useState(null);
     const error = useSelector(state => state.recommendProducts.error);
     const dispatch = useDispatch();
     React.useEffect(() => {
-        const fetchData = async () => {
-            try {
-                dispatch(fetchRecommendProductionsStartActionCreator());
-                const {data} = await axios.get('/api/productList');
-                // setProductList(data);
-                // setLoading(false);
-                // setError(null);
-                dispatch(fetchRecommendProductsSuccessActionCreator(data));
-            } catch (error) {
-                // setLoading(false);
-                // setError(error.message);
-                dispatch(fetchRecommendProductsFailActionCreator(error.message));
-            }
-        }
-        fetchData();
+        dispatch(loadDataActionCreator());
     }, [dispatch]);
     const {productList1 = [], productList2 = [], productList3 = []} = productList;
     const {t} = useTranslation();

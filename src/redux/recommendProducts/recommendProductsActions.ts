@@ -1,3 +1,7 @@
+import {ThunkAction} from 'redux-thunk';
+import {RootState} from '@/redux/store';
+import axios from 'axios';
+
 /**
  * 正在调用推荐信息api
  */
@@ -47,4 +51,14 @@ export const fetchRecommendProductsFailActionCreator = (error): FetchRecommendPr
         type: FETCH_RECOMMEND_PRODUCTS_FAIL,
         payload: error
     };
+}
+
+export const loadDataActionCreator = (): ThunkAction<void, RootState, unknown, RecommendProductionAction> => async (dispatch, getState) => {
+    dispatch(fetchRecommendProductionsStartActionCreator());
+    try {
+        const {data} = await axios.get('/api/productList');
+        dispatch(fetchRecommendProductsSuccessActionCreator(data));
+    } catch (error) {
+        dispatch(fetchRecommendProductsFailActionCreator(error.message));
+    }
 }
