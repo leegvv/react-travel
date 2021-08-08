@@ -8,7 +8,7 @@ import sideImage3 from '@/assets/images/sider_2019_12-09.png';
 import {useTranslation} from 'react-i18next';
 import {useDispatch} from 'react-redux';
 import {useSelector} from '@/redux/hooks';
-import {loadDataActionCreator} from '@/redux/recommendProducts/recommendProductsActions';
+import {loadRecommendProductsActionCreator} from '@/redux/recommendProducts/recommendProductsActions';
 
 
 export const HomePage: React.FC = () => {
@@ -17,7 +17,7 @@ export const HomePage: React.FC = () => {
     const error = useSelector(state => state.recommendProducts.error);
     const dispatch = useDispatch();
     React.useEffect(() => {
-        dispatch(loadDataActionCreator());
+        dispatch(loadRecommendProductsActionCreator());
     }, [dispatch]);
     const {productList1 = [], productList2 = [], productList3 = []} = productList;
     const {t} = useTranslation();

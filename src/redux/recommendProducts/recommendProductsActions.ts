@@ -53,7 +53,7 @@ export const fetchRecommendProductsFailActionCreator = (error): FetchRecommendPr
     };
 }
 
-export const loadDataActionCreator = (): ThunkAction<void, RootState, unknown, RecommendProductionAction> => async (dispatch, getState) => {
+export const loadRecommendProductsActionCreator = (): ThunkAction<void, RootState, unknown, RecommendProductionAction> => async (dispatch, getState) => {
     dispatch(fetchRecommendProductionsStartActionCreator());
     try {
         const {data} = await axios.get('/api/productList');

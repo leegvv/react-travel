@@ -2,16 +2,21 @@ import React from 'react';
 import styles from './SideMenu.module.less';
 import {Menu} from 'antd';
 import {GifOutlined} from '@ant-design/icons';
+import {useDispatch} from 'react-redux';
+import {useSelector} from '@/redux/hooks';
+import {loadSideMenuListActionCreator} from '@/redux/sideMenus/sideMenusActions';
 
+/**
+ * 侧边栏菜单
+ * @param props
+ * @constructor
+ */
 export const SideMenu: React.FC = (props) => {
-    const [sideMenuList, setSideMenuList] = React.useState([]);
+    const sideMenuList = useSelector(state => state.sideMenuList.menuList)
+    const dispatch = useDispatch();
     React.useEffect(() => {
-        fetch('/api/sideMenuList')
-            .then((res) => res.json())
-            .then((data) => {
-                setSideMenuList(data);
-            });
-    }, []);
+        dispatch(loadSideMenuListActionCreator())
+    }, [dispatch]);
     return (
         <Menu
             mode={'vertical'}
