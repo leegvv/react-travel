@@ -1,9 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {RouteComponentProps, useParams} from 'react-router-dom';
 import axios from 'axios';
 import {Spin, Col, Row, DatePicker, Divider, Typography, Menu, Anchor} from 'antd';
 import styles from './DetailPage.module.less';
 import {Header, Footer, ProductIntro, ProductComments} from '@/components';
+import {useDispatch} from 'react-redux';
+import {productDetailSlice} from '@/redux/productDetail/slice';
+import {useSelector} from '@/redux/hooks';
 
 interface MatchParams {
     touristRouteId: string;
@@ -11,36 +14,33 @@ interface MatchParams {
 
 export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (props) => {
     const {touristRouteId} = useParams<MatchParams>();
-    const [loading, setLoading] = useState<boolean>(true);
-    const [product, setProduct] = useState<any>(null);
-    const [error, setError] = useState<string | null>(null);
-    const [comments, setComments] = useState<any[]>([])
+    const product = useSelector(state => state.productDetail.data);
+    const comments = useSelector(state => state.productDetail.comments);
+    const loading = useSelector(state => state.productDetail.loading);
+    const error = useSelector(state => state.productDetail.error);
+    const dispatch = useDispatch();
     useEffect(() => {
         const fetchData = async () => {
-            setLoading(true);
+            dispatch(productDetailSlice.actions.fetchStart());
             try {
                 const {data} = await axios.get(`/api/touristRoutes/${touristRouteId}`)
-                setProduct(data);
-                setLoading(false)
+                dispatch(productDetailSlice.actions.fetchSuccess(data));
             } catch (e) {
-                setLoading(false);
-                setError(e.message);
+                dispatch(productDetailSlice.actions.fetchFail(e.message()));
             }
         }
         fetchData();
-    }, [touristRouteId]);
+    }, [touristRouteId, dispatch]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const {data} = await axios.get(`/api/comments`)
-                setComments(data);
-            } catch (e) {
-                setComments([]);
-            }
+                dispatch(productDetailSlice.actions.fetchComments(data));
+            } catch (e) {}
         }
         fetchData();
-    }, []);
+    }, [dispatch]);
 
     if (loading) {
         return <Spin
