@@ -7,5 +7,11 @@ module.exports = {
     },
     '/api/productList': {
         local: '/productList.js'
+    },
+    '/api/touristRoutes/:touristRouteId': {
+        local: '/touristRoutes.js'
+    },
+    '/api/comments': {
+        local: '/comments.js'
     }
 }
