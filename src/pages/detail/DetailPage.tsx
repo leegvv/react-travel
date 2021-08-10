@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
 import {RouteComponentProps, useParams} from 'react-router-dom';
-import axios from 'axios';
 import {Spin, Col, Row, DatePicker, Divider, Typography, Menu, Anchor} from 'antd';
 import styles from './DetailPage.module.less';
 import {Header, Footer, ProductIntro, ProductComments} from '@/components';
 import {useDispatch} from 'react-redux';
-import {productDetailSlice} from '@/redux/productDetail/slice';
+import {getProductDetail, getComments} from '@/redux/productDetail/slice';
 import {useSelector} from '@/redux/hooks';
 
 interface MatchParams {
@@ -20,26 +19,11 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (props) =>
     const error = useSelector(state => state.productDetail.error);
     const dispatch = useDispatch();
     useEffect(() => {
-        const fetchData = async () => {
-            dispatch(productDetailSlice.actions.fetchStart());
-            try {
-                const {data} = await axios.get(`/api/touristRoutes/${touristRouteId}`)
-                dispatch(productDetailSlice.actions.fetchSuccess(data));
-            } catch (e) {
-                dispatch(productDetailSlice.actions.fetchFail(e.message()));
-            }
-        }
-        fetchData();
+        dispatch(getProductDetail(touristRouteId));
     }, [touristRouteId, dispatch]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const {data} = await axios.get(`/api/comments`)
-                dispatch(productDetailSlice.actions.fetchComments(data));
-            } catch (e) {}
-        }
-        fetchData();
+        dispatch(getComments())
     }, [dispatch]);
 
     if (loading) {

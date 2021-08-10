@@ -1,4 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
+import axios from 'axios';
 
 interface ProductDetailState {
     data: any;
@@ -14,23 +15,44 @@ const initialState: ProductDetailState = {
     error: null
 };
 
+export const getProductDetail = createAsyncThunk(
+    'productDetail/getProductDetail',
+    async (touristRouteId: string) => {
+        const {data} = await axios.get(`/api/touristRoutes/${touristRouteId}`)
+        return data;
+    }
+);
+
+export const getComments = createAsyncThunk(
+    'productDetail/getComments',
+    async () => {
+        const {data} = await axios.get(`/api/comments`)
+        return data;
+    }
+)
+
 export const productDetailSlice = createSlice({
     name: 'productDetail',
     initialState,
     reducers: {
-        fetchStart: (state) => {
+        fetchComments: (state, action) => {
+            state.comments = action.payload;
+        }
+    },
+    extraReducers: {
+        [getProductDetail.pending.type]: (state) => {
             state.loading = true;
         },
-        fetchSuccess: (state, action) => {
+        [getProductDetail.fulfilled.type]: (state, action) => {
             state.loading = false;
             state.data = action.payload;
             state.error = null;
         },
-        fetchFail: (state, action: PayloadAction<string | null>) => {
+        [getProductDetail.rejected.type]: (state, action: PayloadAction<string | null>) => {
             state.loading = false;
             state.error = action.payload;
         },
-        fetchComments: (state, action) => {
+        [getComments.fulfilled.type]: (state, action) => {
             state.comments = action.payload;
         }
     }
