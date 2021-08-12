@@ -3,7 +3,7 @@ import styles from './Header.module.less'
 import {Button, Dropdown, Input, Layout, Menu, Typography} from 'antd';
 import {GlobalOutlined} from '@ant-design/icons';
 import logo from '@/assets/logo.svg';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useDispatch} from 'react-redux';
 import {
@@ -11,6 +11,10 @@ import {
     changeLanguageActionCreator
 } from '@/redux/language/languageActions';
 import {useSelector} from '@/redux/hooks';
+
+interface MatchParams {
+    keywords: string;
+}
 
 export const Header: React.FC = () => {
     const history = useHistory();
@@ -20,6 +24,7 @@ export const Header: React.FC = () => {
     const languageList = useSelector((state) => state.language.languageList);
     // const dispatch = useDispatch<Dispatch<LanguageActionTypes>>();
     const dispatch = useDispatch();
+    const {keywords} = useParams<MatchParams>();
 
     const menuClickHandle = (e) => {
         if (e.key === 'new') {
@@ -61,7 +66,12 @@ export const Header: React.FC = () => {
                     <img src={logo} alt="logo" className={styles.appLogo}/>
                     <Typography.Title level={3} className={styles.title}>{t('header.title')}</Typography.Title>
                 </span>
-                <Input.Search placeholder="请输入旅游目的地、主题、或关键字" className={styles.searchInput}/>
+                <Input.Search
+                    placeholder="请输入旅游目的地、主题、或关键字"
+                    onSearch={value => history.push(`/search/${value}`)}
+                    className={styles.searchInput}
+                    defaultValue={keywords}
+                />
             </Layout.Header>
             <Menu mode={"horizontal"} className={styles.mainMenu}>
                 <Menu.Item key={1}>{t('header.home_page')}</Menu.Item>

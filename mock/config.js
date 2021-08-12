@@ -13,5 +13,8 @@ module.exports = {
     },
     '/api/comments': {
         local: '/comments.js'
+    },
+    '/api/search': {
+        local: '/searchProductList.js'
     }
 }
