@@ -1,5 +1,5 @@
 import i18next from "i18next";
-import {CHANGE_LANGUAGE, ADD_LANGUAGE, LanguageActionTypes} from "./languageActions";
+import {ADD_LANGUAGE, CHANGE_LANGUAGE, LanguageActionTypes} from "./languageActions";
 
 export interface LanguageState {
     language: 'en' | 'zh',
@@ -27,6 +27,7 @@ const languageReducer = (state = defaultState, action: LanguageActionTypes) => {
         default:
             return state;
     }
+    return state;
 };
 
 export default languageReducer;

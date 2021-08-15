@@ -1,12 +1,13 @@
-import React from 'react';
-import styles from './Carousel.module.less';
 import {Carousel as AntdCarousel, Image} from 'antd';
+import React from 'react';
 
 import carouselImage1 from '@/assets/images/carousel_1.jpg';
 import carouselImage2 from '@/assets/images/carousel_2.jpg';
 import carouselImage3 from '@/assets/images/carousel_3.jpg';
 
-export const Carousel: React.FC = () => {
+import styles from './Carousel.module.less';
+
+const Carousel: React.FC = () => {
     return <AntdCarousel
         autoplay={true}
         className={styles.slider}
@@ -16,3 +17,5 @@ export const Carousel: React.FC = () => {
         <Image src={carouselImage3} />
     </AntdCarousel>
 }
+
+export default Carousel;

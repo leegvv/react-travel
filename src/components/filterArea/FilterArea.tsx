@@ -1,9 +1,10 @@
-import React from 'react';
-import styles from './FilterArea.module.less';
 import {Divider} from 'antd';
-import {Filter} from './Filter';
+import React from 'react';
 
-export const FilterArea: React.FC = () => {
+import {Filter} from './Filter';
+import styles from './FilterArea.module.less';
+
+const FilterArea: React.FC = () => {
     return <>
         <Filter
             title='线路评价'
@@ -31,3 +32,5 @@ export const FilterArea: React.FC = () => {
         />
     </>
 }
+
+export default FilterArea;

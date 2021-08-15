@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './App.module.less';
-import {HomePage, SignInPage, RegisterPage, DetailPage, SearchPage} from './pages';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import styles from './App.module.less';
+import {DetailPage, HomePage, RegisterPage, SearchPage, SignInPage} from './pages';
 
-function App() {
+const App: React.FC = () => {
     return (
         <div className={styles.app}>
             <BrowserRouter>

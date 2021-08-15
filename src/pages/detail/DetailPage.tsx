@@ -1,17 +1,17 @@
+import {Anchor, Col, DatePicker, Divider, Menu, Row, Spin, Typography} from 'antd';
 import React, {useEffect} from 'react';
-import {RouteComponentProps, useParams} from 'react-router-dom';
-import {Spin, Col, Row, DatePicker, Divider, Typography, Menu, Anchor} from 'antd';
-import styles from './DetailPage.module.less';
-import {Header, Footer, ProductIntro, ProductComments} from '@/components';
 import {useDispatch} from 'react-redux';
-import {getProductDetail, getComments} from '@/redux/productDetail/slice';
+import {RouteComponentProps, useParams} from 'react-router-dom';
+import {Footer, Header, ProductComments, ProductIntro} from '@/components';
 import {useSelector} from '@/redux/hooks';
+import {getComments, getProductDetail} from '@/redux/productDetail/slice';
+import styles from './DetailPage.module.less';
 
 interface MatchParams {
     touristRouteId: string;
 }
 
-export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (props) => {
+const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
     const {touristRouteId} = useParams<MatchParams>();
     const product = useSelector(state => state.productDetail.data);
     const comments = useSelector(state => state.productDetail.comments);
@@ -125,3 +125,5 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (props) =>
         <Footer/>
     </>
 };
+
+export default DetailPage;

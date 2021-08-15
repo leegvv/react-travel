@@ -29,7 +29,9 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "lint": "npm run lint src",
+    "fix": "eslint --fix --ext .js,.jsx,.ts,.tsx . src/"
   },
   "eslintConfig": {
     "extends": [

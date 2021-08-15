@@ -1,8 +1,8 @@
-import React from 'react';
 import {Layout, Typography} from 'antd';
+import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-export const Footer: React.FC = () => {
+const Footer: React.FC = () => {
     const {t} = useTranslation();
     return (
         <Layout.Footer>
@@ -12,3 +12,5 @@ export const Footer: React.FC = () => {
         </Layout.Footer>
     );
 };
+
+export default Footer;

@@ -1,5 +1,3 @@
-const path = require('path');
-const resolve = (dir) => path.join(__dirname, '.', dir);
 const CracoLess = require('craco-less');
 const CracoAntDesignPlugin = require('craco-antd');
 const mockServer = require('./mock/server');

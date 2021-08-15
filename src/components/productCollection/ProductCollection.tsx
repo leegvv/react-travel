@@ -1,6 +1,7 @@
+import {Col, Divider, Image, Row} from 'antd';
 import React from 'react';
+
 import styles from './ProductCollection.module.less';
-import {Row, Col, Divider, Image} from 'antd';
 import {ProductImage} from './ProductImage';
 
 interface PropsType {
@@ -9,7 +10,7 @@ interface PropsType {
     products: any[];
 }
 
-export const ProductCollection: React.FC<PropsType> = ({title, sideImage, products}) => {
+const ProductCollection: React.FC<PropsType> = ({title, sideImage, products}) => {
     return <div className={styles.content}>
         <Divider orientation='left'>{title}</Divider>
         <Row>
@@ -112,3 +113,5 @@ export const ProductCollection: React.FC<PropsType> = ({title, sideImage, produc
         </Row>
     </div>;
 }
+
+export default ProductCollection;

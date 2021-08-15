@@ -1,1 +1,3 @@
-export * from './ProductIntro';
+import ProductIntro from './ProductIntro';
+
+export default ProductIntro;

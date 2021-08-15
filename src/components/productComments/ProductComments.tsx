@@ -1,5 +1,5 @@
-import React from 'react';
 import {Comment, List} from 'antd';
+import React from 'react';
 
 interface PropType {
     data: {
@@ -10,7 +10,7 @@ interface PropType {
     }[];
 }
 
-export const ProductComments: React.FC<PropType> = ({data}) => {
+const ProductComments: React.FC<PropType> = ({data}) => {
     return <List
         dataSource={data}
         itemLayout='horizontal'
@@ -24,3 +24,5 @@ export const ProductComments: React.FC<PropType> = ({data}) => {
         </li>}
     />
 }
+
+export default ProductComments;

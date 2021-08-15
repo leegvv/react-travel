@@ -1,1 +1,3 @@
-export * from './ProductCollection';
+import ProductCollection from './ProductCollection';
+
+export default ProductCollection;

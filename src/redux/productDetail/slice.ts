@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
+import {createAsyncThunk, createSlice,PayloadAction} from '@reduxjs/toolkit';
 
 interface ProductDetailState {
     data: any;

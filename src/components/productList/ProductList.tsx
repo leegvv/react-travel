@@ -1,7 +1,7 @@
-import React from 'react';
-import {Image, List, Rate, Space, Tag, Typography} from 'antd';
-import {Link} from 'react-router-dom';
 import {LikeOutlined, StarOutlined} from '@ant-design/icons';
+import {Image, List, Rate, Space, Tag, Typography} from 'antd';
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 const {Text} = Typography;
 
@@ -53,7 +53,7 @@ const IconText = ({icon, text}) => (
     </Space>
 );
 
-export const ProductList: React.FC<PropsType> = ({data, pagination, onPageChange}) => {
+const ProductList: React.FC<PropsType> = ({data, pagination, onPageChange}) => {
     const products = listData(data);
     return (
         <List
@@ -127,3 +127,5 @@ export const ProductList: React.FC<PropsType> = ({data, pagination, onPageChange
         />
     );
 }
+
+export default ProductList;

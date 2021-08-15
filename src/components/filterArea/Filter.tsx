@@ -1,5 +1,6 @@
-import React from 'react';
 import {Divider, Typography} from 'antd';
+import React from 'react';
+
 import {FilterTag} from './FilterTag';
 
 interface PropsType {

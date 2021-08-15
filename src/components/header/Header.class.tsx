@@ -1,14 +1,16 @@
-import React from 'react';
-import styles from './Header.module.less'
-import {Button, Dropdown, Input, Layout, Menu, Typography} from 'antd';
 import {GlobalOutlined} from '@ant-design/icons';
-import logo from '@/assets/logo.svg';
-import {withRouter, RouteComponentProps} from 'react-router-dom';
-import {RootState} from '@/redux/store';
-import {withTranslation, WithTranslation} from "react-i18next";
-import {addLanguageActionCreator, changeLanguageActionCreator} from "@/redux/language/languageActions";
+import {Button, Dropdown, Input, Layout, Menu, Typography} from 'antd';
+import React from 'react';
+import {WithTranslation, withTranslation} from "react-i18next";
 import {connect} from 'react-redux';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Dispatch} from 'redux';
+
+import logo from '@/assets/logo.svg';
+import {addLanguageActionCreator, changeLanguageActionCreator} from "@/redux/language/languageActions";
+import {RootState} from '@/redux/store';
+
+import styles from './Header.module.less'
 
 const mapStateToProps = (state: RootState) => {
     return {

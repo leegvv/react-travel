@@ -1,1 +1,3 @@
-export * from './BusinessPartners';
+import BusinessPartners from './BusinessPartners';
+
+export default BusinessPartners;

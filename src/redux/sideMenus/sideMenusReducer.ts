@@ -28,6 +28,7 @@ const sideMenusReducer = (state = defaultState, action: SideMenuListAction) => {
         default:
             return state;
     }
+    return state;
 };
 
 export default sideMenusReducer;

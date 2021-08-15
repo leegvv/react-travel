@@ -1,1 +1,3 @@
-export * from './ProductComments';
+import ProductComments from './ProductComments';
+
+export default ProductComments;

@@ -1,10 +1,10 @@
+import {actionLog} from './middlewares/actionLog';
 import languageReducer from './language/languageReducer';
-import recommendProductsReducer from './recommendProducts/recommendProductsReducer';
-import sideMenusReducer from './sideMenus/sideMenusReducer';
 import {productDetailSlice} from './productDetail/slice';
 import {productSearchSlice} from './productSearch/slice';
-import {actionLog} from './middlewares/actionLog';
-import {configureStore, combineReducers} from '@reduxjs/toolkit';
+import recommendProductsReducer from './recommendProducts/recommendProductsReducer';
+import sideMenusReducer from './sideMenus/sideMenusReducer';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
     language: languageReducer,

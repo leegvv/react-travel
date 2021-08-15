@@ -1,7 +1,7 @@
-import React from 'react';
 import {Image, Typography} from 'antd';
-import {Link} from 'react-router-dom';
+import React from 'react';
 import {useTranslation} from "react-i18next";
+import {Link} from 'react-router-dom';
 
 
 interface PropsType {

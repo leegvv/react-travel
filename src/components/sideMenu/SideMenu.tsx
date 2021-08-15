@@ -1,17 +1,19 @@
-import React from 'react';
-import styles from './SideMenu.module.less';
-import {Menu} from 'antd';
 import {GifOutlined} from '@ant-design/icons';
+import {Menu} from 'antd';
+import React from 'react';
 import {useDispatch} from 'react-redux';
+
 import {useSelector} from '@/redux/hooks';
 import {loadSideMenuListActionCreator} from '@/redux/sideMenus/sideMenusActions';
+
+import styles from './SideMenu.module.less';
 
 /**
  * 侧边栏菜单
  * @param props
  * @constructor
  */
-export const SideMenu: React.FC = (props) => {
+const SideMenu: React.FC = () => {
     const sideMenuList = useSelector(state => state.sideMenuList.menuList)
     const dispatch = useDispatch();
     React.useEffect(() => {
@@ -65,3 +67,5 @@ export const SideMenu: React.FC = (props) => {
         </Menu>
     );
 };
+
+export default SideMenu;

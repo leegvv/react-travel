@@ -1,17 +1,20 @@
-import React, {useEffect} from 'react';
-import styles from './SearchPage.module.less';
-import {Header, Footer, FilterArea, ProductList} from '@/components';
-import {searchProduct} from '@/redux/productSearch/slice';
-import {useParams} from 'react-router-dom';
-import {useSelector} from '@/redux/hooks';
 import {Spin} from 'antd';
+import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
+import {useParams} from 'react-router-dom';
+
+import {FilterArea, ProductList} from '@/components';
+import {MainLayout} from '@/layouts';
+import {useSelector} from '@/redux/hooks';
+import {searchProduct} from '@/redux/productSearch/slice';
+
+import styles from './SearchPage.module.less';
 
 interface MatchParams {
     keywords: string;
 }
 
-export const SearchPage: React.FC = () => {
+const SearchPage: React.FC = () => {
     const {keywords} = useParams<MatchParams>();
     const loading = useSelector(state => state.productSearch.loading);
     const error = useSelector(state => state.productSearch.error);
@@ -42,22 +45,20 @@ export const SearchPage: React.FC = () => {
     if (error) {
         return <div>网站出错：{error}</div>
     }
-    return <>
-        <Header/>
-        <div className={styles.pageContent}>
-            {/*分类过滤器*/}
-            <div className={styles.productListContainer}>
-                <FilterArea />
-            </div>
-            {/*产品列表*/}
-            <div className={styles.productListContainer}>
-                <ProductList
-                    data={productList}
-                    pagination={pagination}
-                    onPageChange={onPageChange}
-                />
-            </div>
+    return <MainLayout>
+        {/*分类过滤器*/}
+        <div className={styles.productListContainer}>
+            <FilterArea />
         </div>
-        <Footer/>
-    </>
+        {/*产品列表*/}
+        <div className={styles.productListContainer}>
+            <ProductList
+                data={productList}
+                pagination={pagination}
+                onPageChange={onPageChange}
+            />
+        </div>
+    </MainLayout>
 }
+
+export default SearchPage;

@@ -1,22 +1,24 @@
-import React from 'react';
-import styles from './Header.module.less'
-import {Button, Dropdown, Input, Layout, Menu, Typography} from 'antd';
 import {GlobalOutlined} from '@ant-design/icons';
-import logo from '@/assets/logo.svg';
-import {useHistory, useParams} from 'react-router-dom';
+import {Button, Dropdown, Input, Layout, Menu, Typography} from 'antd';
+import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {useDispatch} from 'react-redux';
+import {useHistory, useParams} from 'react-router-dom';
+
+import logo from '@/assets/logo.svg';
+import {useSelector} from '@/redux/hooks';
 import {
     addLanguageActionCreator,
     changeLanguageActionCreator
 } from '@/redux/language/languageActions';
-import {useSelector} from '@/redux/hooks';
+
+import styles from './Header.module.less'
 
 interface MatchParams {
     keywords: string;
 }
 
-export const Header: React.FC = () => {
+const Header: React.FC = () => {
     const history = useHistory();
     const {t} = useTranslation();
 
@@ -56,8 +58,8 @@ export const Header: React.FC = () => {
                         {language === 'zh' ? '中文' : 'English'}
                     </Dropdown.Button>
                     <Button.Group className={styles.buttonGroup}>
-                        <Button onClick={() => history.push('signIn')}>{t('header.signin')}</Button>
-                        <Button onClick={() => history.push('register')}>{t('header.register')}</Button>
+                        <Button onClick={() => history.push('/signIn')}>{t('header.signin')}</Button>
+                        <Button onClick={() => history.push('/register')}>{t('header.register')}</Button>
                     </Button.Group>
                 </div>
             </div>
@@ -94,3 +96,5 @@ export const Header: React.FC = () => {
         </div>
     );
 };
+
+export default Header;

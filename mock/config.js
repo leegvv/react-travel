@@ -16,5 +16,8 @@ module.exports = {
     },
     '/api/search': {
         local: '/searchProductList.js'
-    }
+    },
+    '/api/signIn': {
+        local: '/signIn.js'
+    },
 }

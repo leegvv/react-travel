@@ -1,5 +1,3 @@
-const {Tag} = require('antd');
-const React = require('react');
 const productList = [
     {
         id: 1,

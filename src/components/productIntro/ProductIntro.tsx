@@ -1,7 +1,8 @@
-import React from 'react';
-import styles from './ProductIntro.module.less';
-import {Typography, Carousel, Image, Table, Rate} from 'antd';
+import {Carousel, Image, Rate, Table, Typography} from 'antd';
 import {ColumnsType} from 'antd/es/table';
+import React from 'react';
+
+import styles from './ProductIntro.module.less';
 
 interface PropType {
     title: string;
@@ -36,12 +37,11 @@ interface RowType {
     key: number;
 }
 
-export const ProductIntro: React.FC<PropType> = ({
+const ProductIntro: React.FC<PropType> = ({
     title,
     shortDescription,
     price,
     coupons,
-    points,
     discount,
     rating,
     pictures
@@ -117,3 +117,5 @@ export const ProductIntro: React.FC<PropType> = ({
         <Table<RowType> columns={columns} dataSource={tableDataSource} size='small' bordered={false} pagination={false}/>
     </div>
 }
+
+export default ProductIntro;

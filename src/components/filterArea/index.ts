@@ -1,1 +1,3 @@
-export * from './FilterArea';
+import FilterArea from './FilterArea';
+
+export default FilterArea;

@@ -1,5 +1,5 @@
-import {ThunkAction} from 'redux-thunk';
 import {RootState} from '@/redux/store';
+import {ThunkAction} from 'redux-thunk';
 import axios from 'axios';
 
 /**
@@ -53,7 +53,7 @@ export const fetchRecommendProductsFailActionCreator = (error): FetchRecommendPr
     };
 }
 
-export const loadRecommendProductsActionCreator = (): ThunkAction<void, RootState, unknown, RecommendProductionAction> => async (dispatch, getState) => {
+export const loadRecommendProductsActionCreator = (): ThunkAction<void, RootState, unknown, RecommendProductionAction> => async (dispatch) => {
     dispatch(fetchRecommendProductionsStartActionCreator());
     try {
         const {data} = await axios.get('/api/productList');

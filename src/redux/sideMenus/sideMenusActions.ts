@@ -1,6 +1,6 @@
-import {ThunkAction} from 'redux-thunk';
-import {RootState} from '@/redux/store';
 import axios from 'axios';
+import {RootState} from '@/redux/store';
+import {ThunkAction} from 'redux-thunk';
 
 /**
  * 正在调用获取菜单栏api
@@ -53,7 +53,7 @@ export const fetchSideMenuListFailActionCreator = (msg): FetchSideMenuListFailAc
     };
 }
 
-export const loadSideMenuListActionCreator = (): ThunkAction<void, RootState, unknown, SideMenuListAction> => async (dispatch, getState) => {
+export const loadSideMenuListActionCreator = (): ThunkAction<void, RootState, unknown, SideMenuListAction> => async (dispatch) => {
     dispatch(fetchSideMenuListStartActionCreator());
     try {
         const {data} = await axios.get('/api/sideMenuList');

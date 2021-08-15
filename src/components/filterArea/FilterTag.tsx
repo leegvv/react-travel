@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
 import {Tag} from 'antd';
+import React, {useState} from 'react';
 
 interface PropsType {
     onSelect?: () => void;
