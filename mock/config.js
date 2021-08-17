@@ -20,4 +20,13 @@ module.exports = {
     '/api/signIn': {
         local: '/signIn.js'
     },
+    '/api/shoppingCart/getShoppingCart': {
+        local: '/getShoppingCart.js'
+    },
+    '/api/shoppingCart/addShoppingCartItem': {
+        local: '/addShoppingCartItem.js'
+    },
+    '/api/shoppingCart/clearShoppingCartItem': {
+        local: '/clearShoppingCartItem.js'
+    },
 }

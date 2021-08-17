@@ -1,11 +1,13 @@
-import {Anchor, Col, DatePicker, Divider, Menu, Row, Spin, Typography} from 'antd';
+import {Anchor, Button, Col, DatePicker, Divider, Menu, Row, Spin, Typography} from 'antd';
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {RouteComponentProps, useParams} from 'react-router-dom';
+import {RouteComponentProps, useParams, useHistory, useLocation} from 'react-router-dom';
 import {Footer, Header, ProductComments, ProductIntro} from '@/components';
 import {useSelector} from '@/redux/hooks';
 import {getComments, getProductDetail} from '@/redux/productDetail/slice';
 import styles from './DetailPage.module.less';
+import {ShoppingCartOutlined} from '@ant-design/icons';
+import {addShoppingCartItem} from '@/redux/shoppingCart/slice';
 
 interface MatchParams {
     touristRouteId: string;
@@ -17,7 +19,14 @@ const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
     const comments = useSelector(state => state.productDetail.comments);
     const loading = useSelector(state => state.productDetail.loading);
     const error = useSelector(state => state.productDetail.error);
+
+    const jwt = useSelector(state => state.user.token) as string;
+    const shoppingCartLoading = useSelector(state => state.shoppingCart.loading);
     const dispatch = useDispatch();
+    const history = useHistory();
+    const location = useLocation();
+    console.log(location);
+
     useEffect(() => {
         dispatch(getProductDetail(touristRouteId));
     }, [touristRouteId, dispatch]);
@@ -61,6 +70,23 @@ const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
                         />
                     </Col>
                     <Col span={11}>
+                        <Button
+                            style={{display: 'block', marginTop: 50, marginBottom: 30}}
+                            type='primary'
+                            danger={true}
+                            loading={shoppingCartLoading}
+                            onClick={() => {
+                                if (jwt) {
+                                    dispatch(addShoppingCartItem({jwt, touristRouteId: product.id}));
+                                } else {
+                                    history.push('/signIn', {to: location.pathname})
+                                }
+
+                            }}
+                        >
+                            <ShoppingCartOutlined/>
+                            放入购物车
+                        </Button>
                         <DatePicker.RangePicker open={true} style={{marginTop: 20}}/>
                     </Col>
                 </Row>

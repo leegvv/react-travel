@@ -8,3 +8,4 @@ export {default as ProductComments} from './productComments';
 export {default as ProductIntro} from './productIntro';
 export {default as ProductList} from './productList';
 export {default as SideMenu} from './sideMenu';
+export {default as PaymentCard} from './paymentCard';

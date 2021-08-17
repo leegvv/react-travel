@@ -57,8 +57,8 @@ const ProductIntro: React.FC<PropType> = ({
             title: "价格",
             description: (
                 <>
-                    ¥{" "}
-                    <Typography.Text type="danger" strong>
+                    ¥{' '}
+                    <Typography.Text type='danger' strong>
                         {price}
                     </Typography.Text>
                 </>
@@ -70,7 +70,7 @@ const ProductIntro: React.FC<PropType> = ({
             description: discount ? (
                 <>
                     ¥ <Typography.Text delete>{price}</Typography.Text>{" "}
-                    <Typography.Text type="danger" strong>
+                    <Typography.Text type='danger' strong>
                         ¥ {discount}
                     </Typography.Text>
                 </>

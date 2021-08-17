@@ -1,21 +1,26 @@
+import {useState} from 'react';
 import {GlobalOutlined} from '@ant-design/icons';
 import {Button, Dropdown, Input, Layout, Menu, Typography} from 'antd';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useDispatch} from 'react-redux';
 import {useHistory, useParams} from 'react-router-dom';
-
 import logo from '@/assets/logo.svg';
 import {useSelector} from '@/redux/hooks';
 import {
     addLanguageActionCreator,
     changeLanguageActionCreator
 } from '@/redux/language/languageActions';
-
+import jwtDecode, {JwtPayload as DefaultJwtPayload} from 'jwt-decode';
 import styles from './Header.module.less'
+import {userSlice} from '@/redux/user/slice';
 
 interface MatchParams {
     keywords: string;
+}
+
+interface JwtPayload extends DefaultJwtPayload {
+    name: string;
 }
 
 const Header: React.FC = () => {
@@ -24,9 +29,20 @@ const Header: React.FC = () => {
 
     const language = useSelector((state) => state.language.language);
     const languageList = useSelector((state) => state.language.languageList);
-    // const dispatch = useDispatch<Dispatch<LanguageActionTypes>>();
+    const jwt = useSelector(state => state.user.token);
+    const shoppingCartItems = useSelector(state => state.shoppingCart.items);
+    const shoppingCartLoading = useSelector(state => state.shoppingCart.loading);
     const dispatch = useDispatch();
     const {keywords} = useParams<MatchParams>();
+    const [username, setUserName] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (jwt) {
+            const token = jwtDecode<JwtPayload>(jwt)
+            console.log(token);
+            setUserName(token.name);
+        }
+    }, [jwt]);
 
     const menuClickHandle = (e) => {
         if (e.key === 'new') {
@@ -34,6 +50,11 @@ const Header: React.FC = () => {
         } else {
             dispatch(changeLanguageActionCreator(e.key));
         }
+    }
+
+    const onLogout = () => {
+        dispatch(userSlice.actions.logout());
+        history.push('/');
     }
 
     return (
@@ -57,19 +78,38 @@ const Header: React.FC = () => {
                     >
                         {language === 'zh' ? '中文' : 'English'}
                     </Dropdown.Button>
-                    <Button.Group className={styles.buttonGroup}>
-                        <Button onClick={() => history.push('/signIn')}>{t('header.signin')}</Button>
-                        <Button onClick={() => history.push('/register')}>{t('header.register')}</Button>
-                    </Button.Group>
+                    {
+                        jwt ? (
+                            <Button.Group className={styles.buttonGroup}>
+                                <span className={styles.username}>
+                                    {t('header.welcome')}
+                                    <Typography.Text strong={true}>{username}</Typography.Text>
+                                </span>
+                                <Button
+                                    onClick={() => history.push('/shoppingCart')}
+                                    loading={shoppingCartLoading}
+                                >
+                                    {t("header.shoppingCart")}({shoppingCartItems.length})
+                                </Button>
+                                <Button onClick={onLogout}>{t('header.signOut')}</Button>
+                            </Button.Group>
+                        ) : (
+                            <Button.Group className={styles.buttonGroup}>
+                                <Button onClick={() => history.push('/signIn')}>{t('header.signin')}</Button>
+                                <Button onClick={() => history.push('/register')}>{t('header.register')}</Button>
+                            </Button.Group>
+                        )
+                    }
+
                 </div>
             </div>
             <Layout.Header className={styles.mainHeader}>
                 <span onClick={() => history.push('/')}>
-                    <img src={logo} alt="logo" className={styles.appLogo}/>
+                    <img src={logo} alt='logo' className={styles.appLogo}/>
                     <Typography.Title level={3} className={styles.title}>{t('header.title')}</Typography.Title>
                 </span>
                 <Input.Search
-                    placeholder="请输入旅游目的地、主题、或关键字"
+                    placeholder='请输入旅游目的地、主题、或关键字'
                     onSearch={value => history.push(`/search/${value}`)}
                     className={styles.searchInput}
                     defaultValue={keywords}
