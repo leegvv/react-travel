@@ -4,6 +4,7 @@ import {productDetailSlice} from './productDetail/slice';
 import {productSearchSlice} from './productSearch/slice';
 import {userSlice} from './user/slice';
 import {shoppingCartSlice} from './shoppingCart/slice';
+import {orderSlice} from './order/slice';
 import recommendProductsReducer from './recommendProducts/recommendProductsReducer';
 import sideMenusReducer from './sideMenus/sideMenusReducer';
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     productDetail: productDetailSlice.reducer,
     productSearch: productSearchSlice.reducer,
     user: userSlice.reducer,
-    shoppingCart: shoppingCartSlice.reducer
+    shoppingCart: shoppingCartSlice.reducer,
+    order: orderSlice.reducer
 });
 
 // const store = createStore(rootReducer, applyMiddleware(thunk, actionLog));

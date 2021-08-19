@@ -60,6 +60,22 @@ export const clearShoppingCartItem = createAsyncThunk(
     }
 )
 
+export const checkOut = createAsyncThunk(
+    'shoppingCart/checkOut',
+    async (jwt: string) => {
+        const {data} = await axios.post(
+            '/api/shoppingCart/checkOut',
+            null,
+            {
+                headers: {
+                    Authorization: `bearer ${jwt}`
+                }
+            }
+        )
+        return data;
+    }
+)
+
 export const shoppingCartSlice = createSlice({
     name: 'shoppingCart',
     initialState,
@@ -98,6 +114,18 @@ export const shoppingCartSlice = createSlice({
             state.error = null;
         },
         [clearShoppingCartItem.rejected.type]: (state, action: PayloadAction<string | null>) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        [checkOut.pending.type]: (state) => {
+            state.loading = true;
+        },
+        [checkOut.fulfilled.type]: (state) => {
+            state.items = [];
+            state.loading = false;
+            state.error = null;
+        },
+        [checkOut.rejected.type]: (state, action: PayloadAction<string | null>) => {
             state.loading = false;
             state.error = action.payload;
         }

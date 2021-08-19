@@ -4,4 +4,4 @@ export {default as RegisterPage} from './register';
 export {default as SearchPage} from './search';
 export {default as SignInPage} from './signIn';
 export {default as ShoppingCartPage} from './shoppingCart';
-
+export {default as PlaceOrderPage} from './placeOrder';

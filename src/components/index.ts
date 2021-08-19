@@ -9,3 +9,5 @@ export {default as ProductIntro} from './productIntro';
 export {default as ProductList} from './productList';
 export {default as SideMenu} from './sideMenu';
 export {default as PaymentCard} from './paymentCard';
+export {default as PaymentForm} from './paymentForm';
+export {default as CheckOutCard} from './checkOutCard'

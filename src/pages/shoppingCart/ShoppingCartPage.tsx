@@ -4,14 +4,16 @@ import {Affix, Col, Row} from 'antd';
 import {ProductList, PaymentCard} from '@/components';
 import {useSelector} from '@/redux/hooks';
 import {useDispatch} from 'react-redux';
-import {clearShoppingCartItem} from '@/redux/shoppingCart/slice';
+import {clearShoppingCartItem, checkOut} from '@/redux/shoppingCart/slice';
 import styles from './ShoppingCart.module.less';
+import {useHistory} from 'react-router-dom';
 
 const ShoppingCartPage = () => {
     const shoppingCartItems = useSelector(state => state.shoppingCart.items);
     const loading = useSelector(state => state.shoppingCart.loading);
     const jwt = useSelector(state => state.user.token) as string;
     const dispatch = useDispatch();
+    const history = useHistory();
     return (
         <MainLayout>
             <Row>
@@ -35,7 +37,11 @@ const ShoppingCartPage = () => {
                                     .reduce((a, b) => a + b, 0)
                                 }
                                 onCheckout={() => {
-                                    console.log(1);
+                                    if (shoppingCartItems.length <= 0) {
+                                        return;
+                                    }
+                                    dispatch(checkOut(jwt));
+                                    history.push('/placeOrder');
                                 }}
                                 onShoppingCartClear={() => {
                                     dispatch(clearShoppingCartItem({jwt, itemIds: shoppingCartItems.map(s => s.id)}))

@@ -29,4 +29,10 @@ module.exports = {
     '/api/shoppingCart/clearShoppingCartItem': {
         local: '/clearShoppingCartItem.js'
     },
+    '/api/shoppingCart/checkOut': {
+        local: '/checkOut.js'
+    },
+    '/api/orders/:orderId/placeOrder': {
+        local: '/placeOrder.js'
+    },
 }
